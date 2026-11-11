@@ -6,6 +6,8 @@
     modules = [
       config.flake.nixosModules.core
       config.flake.nixosModules.host-module-test-vm
+      config.flake.nixosModules.user-umiko
+      config.flake.nixosModules.home-manager
     ];
   };
 
@@ -15,6 +17,10 @@
     nixpkgs.hostPlatform = "x86_64-linux";
     networking.hostName = "test-vm";
     system.stateVersion = "26.11";
+
+    home-manager.users.umiko.imports = [
+      config.flake.homeModules.git
+    ];
 
     # A real machine needs these. The VM replaces them with its own
     # virtual disk, but `nix flake check` still wants them to exist.
@@ -26,6 +32,7 @@
     # Settings that only apply when this machine is built as a VM.
     virtualisation.vmVariant = {
       users.users.root.initialPassword = "test";
+      users.users.umiko.initialPassword = "test";
       virtualisation.memorySize = 2048; # MiB
       virtualisation.cores = 2;
     };
