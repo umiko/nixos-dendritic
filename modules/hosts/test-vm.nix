@@ -5,13 +5,13 @@
   flake.nixosConfigurations.test-vm = inputs.nixpkgs.lib.nixosSystem {
     modules = [
       config.flake.nixosModules.core
-      config.flake.nixosModules.test-vm
+      config.flake.nixosModules.host-module-test-vm
     ];
   };
 
-  # Store a NixOS module under the name "test-vm".
+  # Store a NixOS module under the name "host-module-test-vm".
   # Everything inside here is plain NixOS config, like your old files.
-  flake.nixosModules.test-vm = {
+  flake.nixosModules.host-module-test-vm = {
     nixpkgs.hostPlatform = "x86_64-linux";
     networking.hostName = "test-vm";
     system.stateVersion = "26.11";
