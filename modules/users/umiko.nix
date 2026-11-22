@@ -4,6 +4,8 @@
       isNormalUser = true;
       extraGroups = [ "wheel" ];
       uid = 3000;
+      openssh.authorizedKeys.keys = [
+      ];
     };
   };
 }

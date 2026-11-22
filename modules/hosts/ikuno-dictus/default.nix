@@ -2,25 +2,28 @@
 { inputs, config, ... }:
 {
   # Turn the stored module(s) into an actual machine.
-  flake.nixosConfigurations.test-vm = inputs.nixpkgs.lib.nixosSystem {
+  flake.nixosConfigurations.ikuno-dictus = inputs.nixpkgs.lib.nixosSystem {
     modules = [
       config.flake.nixosModules.core
-      config.flake.nixosModules.host-module-test-vm
+      config.flake.nixosModules.host-module-ikuno-dictus
       config.flake.nixosModules.user-umiko
       config.flake.nixosModules.home-manager
+      config.flake.nixosModules.headless
     ];
   };
 
   # Store a NixOS module under the name "host-module-test-vm".
   # Everything inside here is plain NixOS config, like your old files.
-  flake.nixosModules.host-module-test-vm = {
+  flake.nixosModules.host-module-ikuno-dictus = {
     nixpkgs.hostPlatform = "x86_64-linux";
-    networking.hostName = "test-vm";
+    networking.hostName = "ikuno-dictus";
     system.stateVersion = "26.11";
 
     home-manager.users.umiko.imports = [
-      config.flake.homeModules.git
+      config.flake.homeModules.headless
     ];
+
+    fastfetch.hostImage = resources/ikuno-dictus.png;
 
     # A real machine needs these. The VM replaces them with its own
     # virtual disk, but `nix flake check` still wants them to exist.
@@ -35,6 +38,13 @@
       users.users.umiko.initialPassword = "test";
       virtualisation.memorySize = 2048; # MiB
       virtualisation.cores = 2;
+      virtualisation.forwardPorts = [
+        {
+          from = "host";
+          host.port = 2222;
+          guest.port = 22;
+        }
+      ];
     };
   };
 }
