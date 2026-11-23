@@ -14,6 +14,7 @@
       fastfetch
       vim
       openssh
+      powertop
     ];
   };
 }
