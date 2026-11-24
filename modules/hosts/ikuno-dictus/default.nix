@@ -1,4 +1,3 @@
-# Top level: this whole file is a flake-parts module.
 { inputs, config, ... }:
 {
   # Turn the stored module(s) into an actual machine.
@@ -12,7 +11,7 @@
     ];
   };
 
-  # Store a NixOS module under the name "host-module-test-vm".
+  # Store a NixOS module under the name "host-module-ikuno-dictus".
   # Everything inside here is plain NixOS config, like your old files.
   flake.nixosModules.host-module-ikuno-dictus = {
     nixpkgs.hostPlatform = "x86_64-linux";
