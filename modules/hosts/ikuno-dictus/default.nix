@@ -11,6 +11,7 @@
       config.flake.nixosModules.host-module-ikuno-dictus
       config.flake.nixosModules.user-umiko
       config.flake.nixosModules.home-manager
+      config.flake.nixosModules.desktop-environment
       config.flake.nixosModules.headless
     ];
   };
