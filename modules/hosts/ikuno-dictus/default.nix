@@ -1,4 +1,8 @@
-{ inputs, config, ... }:
+{
+  inputs,
+  config,
+  ...
+}:
 {
   # Turn the stored module(s) into an actual machine.
   flake.nixosConfigurations.ikuno-dictus = inputs.nixpkgs.lib.nixosSystem {
@@ -13,7 +17,7 @@
 
   # Store a NixOS module under the name "host-module-ikuno-dictus".
   # Everything inside here is plain NixOS config, like your old files.
-  flake.nixosModules.host-module-ikuno-dictus = {
+  flake.nixosModules.host-module-ikuno-dictus = { lib, ... }: {
     nixpkgs.hostPlatform = "x86_64-linux";
     networking.hostName = "ikuno-dictus";
     system.stateVersion = "26.11";
@@ -35,6 +39,8 @@
     virtualisation.vmVariant = {
       users.users.root.initialPassword = "test";
       users.users.umiko.initialPassword = "test";
+      services.openssh.settings.PasswordAuthentication = lib.mkForce true;
+
       virtualisation.memorySize = 2048; # MiB
       virtualisation.cores = 2;
       virtualisation.forwardPorts = [
