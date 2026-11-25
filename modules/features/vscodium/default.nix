@@ -24,6 +24,7 @@
           "claudeCode.hideOnboarding" = true;
           "nix.formatterPath" = "${pkgs.nixfmt}/bin/nixfmt";
           "[nix]"."editor.formatOnSave" = true;
+          "explorer.confirmDragAndDrop" = false;
         };
       };
     };
