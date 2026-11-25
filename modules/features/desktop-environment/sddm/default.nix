@@ -8,6 +8,9 @@
 
       # this does nothing on wayland
       # autoNumlock = true;
+
+      # plasma sets the breeze theme by default
+      # theme = "breeze";
       enableHidpi = true;
     };
   };
