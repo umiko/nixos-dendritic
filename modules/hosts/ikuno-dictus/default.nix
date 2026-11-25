@@ -41,17 +41,22 @@
     virtualisation.vmVariant = {
       users.users.root.initialPassword = "test";
       users.users.umiko.initialPassword = "test";
-      services.openssh.settings.PasswordAuthentication = lib.mkForce true;
 
-      virtualisation.memorySize = 2048; # MiB
-      virtualisation.cores = 2;
-      virtualisation.forwardPorts = [
-        {
-          from = "host";
-          host.port = 2222;
-          guest.port = 22;
-        }
-      ];
+      virtualisation.resolution = {
+        x = 1920;
+        y = 1080;
+      };
+      virtualisation.memorySize = 4096; # MiB
+      virtualisation.cores = 4;
+      # only used with openssh/headless
+      # services.openssh.settings.PasswordAuthentication = lib.mkForce true;
+      # virtualisation.forwardPorts = [
+      #   {
+      #     from = "host";
+      #     host.port = 2222;
+      #     guest.port = 22;
+      #   }
+      # ];
     };
   };
 }
