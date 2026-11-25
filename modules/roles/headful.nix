@@ -8,7 +8,8 @@
   flake.nixosModules.headful = {
     imports = with config.flake.nixosModules; [
       desktop-environment
-      vim
+      audio
+      printer
     ];
   };
 }
