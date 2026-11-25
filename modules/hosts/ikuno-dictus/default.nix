@@ -6,13 +6,13 @@
 {
   # Turn the stored module(s) into an actual machine.
   flake.nixosConfigurations.ikuno-dictus = inputs.nixpkgs.lib.nixosSystem {
-    modules = [
-      config.flake.nixosModules.core
-      config.flake.nixosModules.host-module-ikuno-dictus
-      config.flake.nixosModules.user-umiko
-      config.flake.nixosModules.home-manager
-      config.flake.nixosModules.desktop-environment
-      config.flake.nixosModules.headless
+    modules = with config.flake.nixosModules; [
+      core
+      host-module-ikuno-dictus
+      user-umiko
+      home-manager
+      headful
+      development
     ];
   };
 
@@ -23,8 +23,9 @@
     networking.hostName = "ikuno-dictus";
     system.stateVersion = "26.11";
 
-    home-manager.users.umiko.imports = [
-      config.flake.homeModules.headless
+    home-manager.users.umiko.imports = with config.flake.homeModules; [
+      headful
+      development
     ];
 
     fastfetch.hostImage = resources/ikuno-dictus.png;
